@@ -167,6 +167,8 @@
 
             $valueBias = $_SESSION['value_bias'];
 
+            $fungsiAktivasi = array();
+
             if (mysqli_num_rows($data) > 0) {
                 $values = array();
                 while($d = mysqli_fetch_array($data)){
@@ -174,7 +176,6 @@
                 }
                 $max = max($values);
                 $min = min($values);
-                $fungsiAktivasi = array();
                 ?>
                 <table>
                     <tr>
@@ -205,6 +206,7 @@
                     <tr>
                         <td> <?php echo $index+1; ?></td>
                         <?php
+                            $subFungsiAktivasi = array();
                             for($iColumn = 0; $iColumn < $hiddenLength; $iColumn++){
                         ?>
                             <td><?php 
@@ -220,11 +222,15 @@
                                     $indexListData++;
                                 }
                                 $hinit += $valueBias[$iColumn];
+
+                                array_push($subFungsiAktivasi, $result = 1 / (1+(exp(-$hinit))));
                                 
                                 echo $result = 1 / (1+(exp(-$hinit)));
                                 
                             ?></td>
-                        <?php } ?>
+                        <?php }
+                            array_push($fungsiAktivasi,$subFungsiAktivasi);
+                        ?>
 
                         <?php } ?>
                     </tr>
@@ -236,45 +242,33 @@
                 }
                 ?>
 
+        <script>
+            console.log('fungsiAktivasi', JSON.parse("<?= json_encode($fungsiAktivasi) ?>"))
+        </script>
+
         <h2>Hasil Output Prediksi</h2>
         <?php
             $resultOprediksi = array();
-            $indexA = 0;
+            $resultWeight = $_SESSION['result_weight'];
             foreach ($fungsiAktivasi as $fungsiAktivasiA) {
-                $resultOprediksi[$indexA] = array();
-                $indexB = 0;
-                $resultB = array();
+                $resulSubCountPrediksi = 0;
+                $indexA = 0;
                 foreach ($fungsiAktivasiA as $fungsiAktivasiB) {
-                    
-                    $resultValueB = 0;
-                    $indexC = 0;
-                    foreach ($fungsiAktivasiB as $fungsiAktivasiC) {
-                        $resultValueB = $resultValueB + ($fungsiAktivasiA[$indexC] * $fungsiAktivasiC);
-                        $indexC++;
-                    }
-                    array_push($resultB,$resultValueB);    
-                    $indexB++;
+                    $resulSubCountPrediksi += ($resultWeight[$indexA] * $fungsiAktivasiB);
+                    $indexA++;
                 }
-                $resultOprediksi[$indexA] = $resultB;
-                $indexA++;
+                array_push($resultOprediksi,$resulSubCountPrediksi);
             }
         ?>
+
         <table>
             <?php
-                $indexKeyObe = 0; 
-                foreach($resultObe as $keyObe) {
-                $indexItemObe = 0;
+                foreach($resultOprediksi as $resultOprediksiA) {
             ?>
                 <tr>
-                    <?php foreach($keyObe as $itemObe) { ?>
-                        <td><?= $itemObe ?></td>
-                    <?php
-                        $indexItemObe++;
-                        }
-                    ?>
+                    <td><?= $resultOprediksiA ?></td>
                 </tr>
             <?php
-                $indexKeyObe++; 
                 }
             ?>
         </table>
