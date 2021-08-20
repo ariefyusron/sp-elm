@@ -274,40 +274,33 @@
         </table>
 
         <h2>Hasil Denormalisasi Data</h2>
+        <?php
+            $resultDenormalisasi = array();
+            $dataMax = $_SESSION['data_max'];
+            $dataMin = $_SESSION['data_min'];
+            foreach ($resultOprediksi as $resultOprediksiA) {
+                array_push($resultDenormalisasi, ($resultOprediksiA * ($dataMax - $dataMin)) + $dataMin);
+            }
+        ?>
+
         <table>
-                        <tr>
-                            <th>No</th>
-                            <?php
-                                for($x = 1; $x <= $length; $x++){
-                            ?>
-                                <th>X<?= $x ?></th>
-                            <?php        
-                                }
-                            ?>
-                            <th>Target</th>
-                        </tr>
-                        <?php
-                            foreach($values as $value){
-                                $sliceArrays = array_slice($values,$index + 1 , $length);
-                                if(count($sliceArrays) === $length){
-                        ?>
-                        <tr>
-                            <td> <?php echo $index+1; ?></td>
-                            <td> <?php echo $value($max - $min) + $min; ?></td>
-                            <?php 
-                                foreach ($sliceArrays as $sliceArray) {
-                            ?>
-                                <td> <?= $value($max - $min) + $min; ?></td>
-                            <?php }} ?>
-                        </tr>
-                        <?php
-                        $index++;
-                            } ?>                        
-                    </table>
+            <?php
+                foreach($resultDenormalisasi as $resultDenormalisasiA) {
+            ?>
+                <tr>
+                    <td><?= $resultDenormalisasiA ?></td>
+                </tr>
+            <?php
+                }
+            ?>
+        </table>
         </div>        
     </body>
 
         <script>
+                        console.log('denor', JSON.parse("<?= json_encode($resultDenormalisasi) ?>"))
             console.log('weight', JSON.parse("<?= json_encode($_SESSION['result_weight']) ?>"))
+            console.log('max', <?= $_SESSION['data_max'] ?>)
+            console.log('min', <?= $_SESSION['data_min'] ?>)
         </script>
 </html>

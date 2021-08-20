@@ -543,7 +543,7 @@
                 <?php
                 }
 
-                $_SESSION['result_weight'] = $resultWeight
+                $_SESSION['result_weight'] = $resultWeight;
                 ?>
 
 <script>

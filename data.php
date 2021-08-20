@@ -1,5 +1,6 @@
 <?php
     include "koneksi.php";
+    session_start();
     $length = 4;
 ?>
 <html>
@@ -98,6 +99,7 @@
                         </tr>
                         
                         <?php
+                            $dataArray = array();
                             while($d = mysqli_fetch_array($data)){
                             //print_r($d);
                         ?>
@@ -107,7 +109,11 @@
                             <td> <?php echo $d['jumlah']; ?></td>
                         </tr>
                         <?php
-                            } ?>
+                            array_push($dataArray, (float)$d['jumlah']);
+                            }
+                            $_SESSION['data_max'] = max($dataArray);
+                            $_SESSION['data_min'] = min($dataArray);
+                            ?>
                         
                     </table>
                 <?php
