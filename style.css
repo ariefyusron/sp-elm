@@ -1,0 +1,237 @@
+@import url('https://fonts.googleapis.com/css2?family=Akaya+Telivigala&family=Bebas+Neue&display=swap');
+body {
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+.sidebar {
+    position: absolute;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background: #2e444e;
+    transition: all .5s ease;
+}
+
+.sidebar header {
+    font-size: 22px;
+    color: white;
+    text-align: center;
+    line-height: 70px;
+    background: #638491;
+    user-select: none;
+}
+
+.sidebar ul a {
+    display: block;
+    height: 8%;
+    width: 100%;
+    line-height: 50px;
+    font-size: 20px;
+    color: white;
+    padding-left: 40px;
+    box-sizing: border-box;
+    border-top: 1px solid rgb(255, 255, 255, .1);
+    border-bottom: 1px solid black;
+    transition: .4s;
+}
+
+ul li:hover a {
+    padding-left: 50px;
+}
+
+.sidebar ul a i {
+    margin-right: 16px;
+}
+
+#check {
+    display: none;
+}
+
+label #btn,
+label #cancel {
+    position: fixed;
+    cursor: pointer;
+    background: #042311;
+    border-radius: 3px;
+}
+
+label #btn {
+    left: 150px;
+    top: 17px;
+    font-size: 25px;
+    color: white;
+    padding: 1px 2px;
+}
+
+label #cancel {
+    z-index: 1111;
+    left: 195px;
+    top: 17px;
+    font-size: 15px;
+    color: #0a5275;
+    padding: 4px 9px;
+}
+
+#check:checked~.sidebar {
+    left: 0;
+}
+
+.container {
+    width: 950px;
+    border-radius: 15px;
+    background: #94b1c9;
+    padding: 20px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+input[type=text],
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+.lebel {
+    padding: 12px 12px 12px 0;
+    display: block;
+}
+
+input[type=upload] {
+    background-color: #554f49;
+    color: white;
+    padding: 12px;
+    width: 10%;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: left;
+    text-align: center;
+    display: inline-block;
+    transition-duration: 0.4s;
+    /* Safari */
+    transition-duration: 0.4s;
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+    display: inline-block;
+    transition-duration: 0.4s;
+    /* Safari */
+    transition-duration: 0.4s;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.btn-group .button {
+    background-color: #94b1c9;
+    margin-top: 1%;
+    border: none;
+    color: black;
+    padding: 20px 48px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+}
+
+.btn-group .button:hover {
+    background-color: #332f2c;
+    color: white;
+}
+
+h2 {
+    margin-top: 7%;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 89%;
+}
+
+td,
+th {
+    border: 1px solid #2b2323;
+    text-align: center;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #94b1c9;
+}
+
+.ca .al {
+    background-color: #222425;
+    margin-top: 0%;
+    border: none;
+    color: rgb(255, 255, 255);
+    padding: 10px 44px;
+    float: center;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.ca .al:hover {
+    background-color: #585858;
+    color: rgb(0, 0, 0);
+}
+
+input[type=import] {
+    background-color: #131212;
+    color: white;
+    padding: 10px 0px;
+    margin: 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    transition-duration: 0.4s;
+    /* Safari */
+    transition-duration: 0.4s;
+}
+
+input[type=import]:hover {
+    background-color: #7c7676;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
