@@ -157,6 +157,7 @@
             $data = mysqli_query($koneksi, "SELECT * FROM data_hari");
             $index = 0;
             $percentResult = (100 - $percent) / 100;
+            $targetTesting = array();
             if (mysqli_num_rows($data) > 0) {
                 $values = array();
                 while($d = mysqli_fetch_array($data)){
@@ -196,10 +197,15 @@
                         <td> <?php echo $index+1; ?></td>
                         <td> <?php echo ($value - $min) / ($max - $min); ?></td>
                         <?php 
+                            $indexSliceArrays = 0;
                             foreach ($sliceArrays as $sliceArray) {
+                                $resultTargetTesting = ($sliceArray - $min) / ($max - $min);
+                                if(count($sliceArrays) === ($indexSliceArrays + 1)){
+                                    array_push($targetTesting, $resultTargetTesting);
+                                }
                         ?>
-                            <td> <?= ($sliceArray - $min) / ($max - $min); ?></td>
-                        <?php }} ?>
+                            <td> <?= $resultTargetTesting; ?></td>
+                        <?php $indexSliceArrays++; }} ?>
                     </tr>
                     <?php
                     $index++;
@@ -207,7 +213,13 @@
                 </table>
                 <?php
                 }
+
+                $_SESSION["target_testing"] = $targetTesting;
                 ?>
+
+        <script>
+            console.log('targetTesting', JSON.parse("<?= json_encode($_SESSION["target_testing"]) ?>"))
+        </script>
         
         <h2>Nilai Bobot</h2>
         <table>

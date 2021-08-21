@@ -259,6 +259,7 @@
                 }
                 array_push($resultOprediksi,$resulSubCountPrediksi);
             }
+            $_SESSION["output_prediksi"] = $resultOprediksi;
         ?>
 
         <table>

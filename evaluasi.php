@@ -1,3 +1,9 @@
+<?php 
+    include "koneksi.php";
+    $length = 4;
+    session_start();
+    $hiddenLength = 3; 
+?>
 <html>
     <head>
         <meta charset="utf-8">
@@ -78,17 +84,35 @@
                 <a href="http://localhost/sp/evaluasi.php" class="button">Hasil Evaluasi</a>
             </div>
 
+            <script>
+                console.log('outputPrediksi', JSON.parse("<?= json_encode($_SESSION["output_prediksi"]) ?>"))
+                console.log('targetTesting', JSON.parse("<?= json_encode($_SESSION["target_testing"]) ?>"))
+            </script>
+
             <h2>Nilai MAPE</h2>
         <table>
             <tr>
                 <th>Nilai Error</th>
             </tr>
-            <tr>
-                <th></th>
-            </tr>
-            <tr>
-                <th></th>
-            </tr>
+            <?php
+                $target = $_SESSION["target_testing"];
+                $output = $_SESSION["output_prediksi"];
+                $index = 0;
+                $nilaiMape = array();
+
+                foreach ($target as $Itarget) {
+                    array_push($nilaiMape, ($Itarget - $output[$index]) / 2);
+                    $index++;
+                }
+
+                foreach ($nilaiMape as $InilaiMape) {
+            ?>
+                    <tr>
+                        <td><?= $InilaiMape ?>%</td>
+                    </tr>
+            <?php
+                }
+            ?>
         </table>
 
         <h2>Nilai Akurasi</h2>
@@ -96,12 +120,15 @@
             <tr>
                 <th>Akurasi</th>
             </tr>
-            <tr>
-                <th></th>
-            </tr>
-            <tr>
-                <th></th>
-            </tr>
+            <?php
+                foreach ($nilaiMape as $InilaiMape) {
+            ?>
+                    <tr>
+                        <td><?= 100 - $InilaiMape ?>%</td>
+                    </tr>
+            <?php
+                }
+            ?>
         </table>
         </div>        
     </body>
