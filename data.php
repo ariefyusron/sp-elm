@@ -31,53 +31,7 @@
         </div>
 
         <div style="margin-left:10%;padding:80px 10px;">
-            <div class="container">
-                
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="data">Data Load</label>
-                        </div>
-                        <div class="col-75">
-                            <form method="post" enctype="multipart/form-data" action="p_data.php">
-                                <button><input name="filedata" type="file" required="required"></button>
-                                <button name="upload" type="submit">Import</button>
-                                <!--<input type="upload" value="Upload">-->
-                            </form>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="fitur">Jumlah Fitur</label>
-                        </div>
-                        <div class="col-75">
-                            <input type="text" id="fitur" name="jumlahfitur" placeholder="Wajib Diisi..">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="hiden">Jumlah Hiddden Neuron</label>
-                        </div>
-                        <div class="col-75">
-                            <input type="text" id="hiden" name="jumlahhiden" placeholder="Wajib Diisi..">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="persen">Persentase Pembagian Data</label>
-                        </div>
-                        <div class="col-75">
-                            <select id="persen" name="persendata">
-                                <option value="50">Data Training 50% : Data Testing 50%</option>
-                                <option value="80">Data Training 80% : Data Testing 20%</option>
-                                <option value="90">Data Training 90% : Data Testing 10%</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <br><input type="submit" value="Submit">
-                    </div>
-                </form>
-            </div>
+            <?php include "form.php" ?>
 
             <div class="btn-group">
                 <a href="http://localhost/sp/data.php" class="button">Data</a>

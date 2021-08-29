@@ -27,49 +27,7 @@
         </div>
 
         <div style="margin-left:10%;padding:80px 10px;">
-            <div class="container">
-                <form action="">
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="data">Data Load</label>
-                        </div>
-                        <div class="col-75">
-                            <input type="upload" value="Upload">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="fitur">Jumlah Fitur</label>
-                        </div>
-                        <div class="col-75">
-                            <input type="text" id="fitur" name="jumlahfitur" placeholder="Wajib Diisi..">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="hiden">Jumlah Hiddden Neuron</label>
-                        </div>
-                        <div class="col-75">
-                            <input type="text" id="hiden" name="jumlahhiden" placeholder="Wajib Diisi..">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="persen">Persentase Pembagian Data</label>
-                        </div>
-                        <div class="col-75">
-                            <select id="persen" name="persendata">
-                                <option value="data1">Data Training 50% : Data Testing 50%</option>
-                                <option value="data2">Data Training 80% : Data Testing 20%</option>
-                                <option value="data3">Data Training 90% : Data Testing 10%</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <br><input type="submit" value="Submit">
-                    </div>
-                </form>
-            </div>
+            <?php include "form.php" ?>
 
             <div class="btn-group">
                 <a href="http://localhost/sp/data.php" class="button">Data</a>
