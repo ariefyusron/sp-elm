@@ -333,45 +333,96 @@
         </table>
 
         <?php
-            $manipulateResultObe = $resultObe;
-            if(count($resultObe) > 2) {
-                $indexManipulateResultObe = 0;
-                foreach($resultObe as $keyManipulateResultObe) {
-                    $manipulateResultObe[$indexManipulateResultObe] = array_merge($keyManipulateResultObe,array_slice($keyManipulateResultObe, 0,count($keyManipulateResultObe) - 1));
-                    $indexManipulateResultObe++;
+            function getDet ($dataArray) {
+                $manipulateResultObe = $dataArray;
+                $det = 0;
+                if(count($dataArray) > 2) {
+                    $indexManipulateResultObe = 0;
+                    foreach($dataArray as $keyManipulateResultObe) {
+                        $manipulateResultObe[$indexManipulateResultObe] = array_merge($keyManipulateResultObe,array_slice($keyManipulateResultObe, 0,count($keyManipulateResultObe) - 1));
+                        $indexManipulateResultObe++;
+                    }
+                    $kolomBasic = 0;
+                    foreach($dataArray as $itemResultObe) {
+                        $baris = 0;
+                        $kolom = $kolomBasic;
+                        $resultPositive = 1;
+                        foreach($dataArray as $subItemResultObe) {
+                            $resultPositive = $resultPositive * $manipulateResultObe[$baris][$kolom];
+                            $baris++;
+                            $kolom++;
+                        }
+                        $det = $det + $resultPositive;
+                        $kolomBasic++;
+                    }
+
+                    $kolomBasic = 0;
+                    foreach($dataArray as $itemResultObe) {
+                        $baris = count($dataArray) - 1;
+                        $kolom = $kolomBasic;
+                        $resultPositive = 1;
+                        foreach($dataArray as $subItemResultObe) {
+                            $resultPositive = $resultPositive * $manipulateResultObe[$baris][$kolom];
+                            $baris--;
+                            $kolom++;
+                        }
+                        $det = $det - $resultPositive;
+                        $kolomBasic++;
+                    }
+                } else {;
+                    $det = ($dataArray[0][0] * $dataArray[1][1]) - ($dataArray[0][1] * $dataArray[1][0]);
                 }
+
+                return $det;
             }
 
-            $indexManipulateResultObe = 0;
-            $valuePlus = array();
-            $valueMin = array();
-            foreach($manipulateResultObe as $keyManipulateResultObe) {
-                if($indexManipulateResultObe === 0) {
-                    $indexItemManipulate = 0;
-                    foreach($keyManipulateResultObe as $itemManipulateObe) {
-                        if($indexItemManipulate <= (count($resultObe) - 1)) {
-                            array_push($valuePlus, array($itemManipulateObe));
+            function manipulateArray ($dataArray, $indexBaris, $indexKolom) {
+                $res = array();
+                foreach ($dataArray as $key => $item) {
+                    if($key !== $indexBaris) {
+                        $resSub = array();
+                        foreach($item as $keySub => $subItem) {
+                            if($keySub !== $indexKolom) {
+                                array_push($resSub, $subItem);
+                            }
                         }
-                        $indexItemManipulate++;
-                    }
-                } else {
-                    $indexItemManipulate = 0;
-                    foreach($keyManipulateResultObe as $itemManipulateObe) {
-                        if($indexItemManipulate >= $indexManipulateResultObe && $indexItemManipulate >= $indexManipulateResultObe) {
-                            // array_push($valuePlus[$indexItemManipulate - 1],$itemManipulateObe);
-                        }
-                        $indexItemManipulate++;
+                        array_push($res, $resSub);
                     }
                 }
 
-                $indexManipulateResultObe++;
+                return $res;
+            }
+
+
+            $inversObe = $resultObe;
+            foreach($resultObe as $keyItem=>$itemInversObe) {
+                foreach($itemInversObe as $keySubItem=>$subItemInversObe) {
+                    $matrix = manipulateArray($resultObe, $keyItem, $keySubItem);
+                    $inversObe[$keyItem][$keySubItem] = 1 / getDet($resultObe) * getDet($matrix);
+                }
             }
         ?>
 
-        <script>
-            console.log('res', JSON.parse("<?= json_encode($dataTranspose) ?>"))
-            console.log('valuePlus', JSON.parse("<?= json_encode($resultObe) ?>"))
-        </script>
+                    <script>
+                        console.log('tes', JSON.parse('<?= json_encode($inversObe) ?>'))
+                    </script>
+<br>
+        <table>
+            <?php
+                foreach($inversObe as $keyObe) {
+            ?>
+                <tr>
+                    <?php foreach($keyObe as $itemObe) { ?>
+                        <td><?= $itemObe ?></td>
+                    <?php
+                        }
+                    ?>
+                </tr>
+            <?php
+                $indexKeyObe++; 
+                }
+            ?>
+        </table>
 
         <br/>
         <br/>
@@ -428,7 +479,7 @@
                                         $result = 0;
                                         $indexSub = 0;
                                         foreach($dataTranspose as $subDataTranspose) {
-                                            $result = $result + $subDataTranspose[$indexKeyData] * $resultObe[$indexTranspose][$indexSub];
+                                            $result = $result + $subDataTranspose[$indexKeyData] * $inversObe[$indexTranspose][$indexSub];
 
                                             $indexSub++;
                                         }
@@ -449,10 +500,6 @@
                 <?php
                 }
                 ?>
-
-<script>
-            console.log('target', JSON.parse("<?= json_encode($_SESSION['target_list']) ?>"))
-        </script>
 
         <h2>Hasil Output Weight</h2>
         <?php
@@ -481,7 +528,7 @@
                                     $result = 0;
                                     $indexSub = 0;
                                     foreach($dataTranspose as $subDataTranspose) {
-                                        $result = $result + $subDataTranspose[$indexKeyData] * $resultObe[$indexTranspose][$indexSub];
+                                        $result = $result + $subDataTranspose[$indexKeyData] * $inversObe[$indexTranspose][$indexSub];
 
                                         $indexSub++;
                                     }
@@ -503,10 +550,6 @@
 
                 $_SESSION['result_weight'] = $resultWeight;
                 ?>
-
-<script>
-            console.log('weight', JSON.parse("<?= json_encode($resultWeight) ?>"))
-        </script>
 
         </div>        
     </body>
