@@ -333,7 +333,7 @@
         </table>
 
         <?php
-            function getDet ($dataArray) {
+            function getAdj ($dataArray) {
                 $manipulateResultObe = $dataArray;
                 $det = 0;
                 if(count($dataArray) > 2) {
@@ -393,18 +393,26 @@
                 return $res;
             }
 
+            $detA = 0;
+            foreach($resultObe as $keyItem=>$itemInversObe) {
+                $plusOrMin = $keyItem % 2 === 0 ? 1 : -1;
+                $detA = $detA + ($plusOrMin * (getAdj(manipulateArray($resultObe, $keyItem, 0))));
+            }
 
             $inversObe = $resultObe;
+            $plusOrMin = -1;
             foreach($resultObe as $keyItem=>$itemInversObe) {
                 foreach($itemInversObe as $keySubItem=>$subItemInversObe) {
+                    $plusOrMin = $plusOrMin === -1 ? 1 : -1;
                     $matrix = manipulateArray($resultObe, $keyItem, $keySubItem);
-                    $inversObe[$keyItem][$keySubItem] = 1 / getDet($resultObe) * getDet($matrix);
+                    $inversObe[$keyItem][$keySubItem] = $plusOrMin * (1 / $detA * getAdj($matrix));
                 }
             }
         ?>
 
                     <script>
                         console.log('tes', JSON.parse('<?= json_encode($inversObe) ?>'))
+                        console.log('tes', '<?= $detA ?>')
                     </script>
 <br>
         <table>
