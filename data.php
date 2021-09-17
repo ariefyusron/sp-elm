@@ -5,10 +5,11 @@
     $hiddenLength = (int)$_POST['jumlahhiden'];
     $persendata = (int)$_POST['persendata'];
 
-    if($_POST['jumlahfitur']) {
+    if(isset($_POST['jumlahfitur'])) {
         $_SESSION['jumlahfitur'] = $length;
         $_SESSION['jumlahhiden'] = $hiddenLength;
         $_SESSION['persendata'] = $persendata;
+        include "proses_file.php";
     } else {
         $length = $_SESSION['jumlahfitur'];
         $hiddenLength = $_SESSION['jumlahhiden'];

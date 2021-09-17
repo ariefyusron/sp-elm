@@ -2,13 +2,13 @@
   session_start();
 ?>
 
-<form class="container" method="POST" action="data.php">
+<form class="container" method="POST" enctype="multipart/form-data" action="data.php">
   <div class="row">
     <div class="col-25">
       <label for="data">Data Load</label>
     </div>
     <div class="col-75">
-      <input type="file" value="Upload">
+      <input type="file" value="Upload" name="fileexcel">
     </div>
   </div>
   <div class="row">
