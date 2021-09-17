@@ -1,7 +1,19 @@
 <?php
     include "koneksi.php";
     session_start();
-    $length = 4;
+    $length = (int)$_POST['jumlahfitur'];
+    $hiddenLength = (int)$_POST['jumlahhiden'];
+    $persendata = (int)$_POST['persendata'];
+
+    if($_POST['jumlahfitur']) {
+        $_SESSION['jumlahfitur'] = $length;
+        $_SESSION['jumlahhiden'] = $hiddenLength;
+        $_SESSION['persendata'] = $persendata;
+    } else {
+        $length = $_SESSION['jumlahfitur'];
+        $hiddenLength = $_SESSION['jumlahhiden'];
+        $persendata = $_SESSION['persendata'];
+    }
 ?>
 <html>
     <head>

@@ -1,8 +1,10 @@
 <?php 
     include "koneksi.php";
-    $length = 4;
     session_start();
-    $hiddenLength = 3; 
+    $length = $_SESSION['jumlahfitur'];
+    $hiddenLength = $_SESSION['jumlahhiden'];  
+    $percent = $_SESSION['persendata'];
+    $percentResult = $percent / 100;
 ?>
 <html>
     <head>
@@ -46,8 +48,8 @@
         <?php
             $data = mysqli_query($koneksi, "SELECT * FROM data_hari");
             $index = 0;
-            $percent = 50;
-            $percentResult = $percent / 100;
+            
+            
 
             $valueBobot = $_SESSION['value_bobot'];
 
@@ -121,8 +123,8 @@
         <?php
             $data = mysqli_query($koneksi, "SELECT * FROM data_hari");
             $index = 0;
-            $percent = 50;
-            $percentResult = $percent / 100;
+            
+            
 
             $valueBobot = $_SESSION['value_bobot'];
 
@@ -289,7 +291,7 @@
                 }
                 ?>
 
-        <h2>Hasil Invers OBE</h2>
+        <h2>Hasil OBE</h2>
         <?php
             $resultObe = array();
             $indexA = 0;
@@ -414,7 +416,8 @@
                         console.log('tes', JSON.parse('<?= json_encode($inversObe) ?>'))
                         console.log('tes', '<?= $detA ?>')
                     </script>
-<br>
+
+        <h2>Hasil Invers OBE</h2>
         <table>
             <?php
                 foreach($inversObe as $keyObe) {

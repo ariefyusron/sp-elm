@@ -1,8 +1,8 @@
 <?php 
     include "koneksi.php";
-    $length = 4;
     session_start();
-    $hiddenLength = 3; 
+    $length = $_SESSION['jumlahfitur'];
+    $hiddenLength = $_SESSION['jumlahhiden']; 
 ?>
 <html>
     <head>

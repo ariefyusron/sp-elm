@@ -1,4 +1,10 @@
-<?php session_start(); ?>
+<?php
+    session_start();
+    $length = $_SESSION['jumlahfitur'];
+    $hiddenLength = $_SESSION['jumlahhiden'];
+    $percent = $_SESSION['persendata'];
+    $percentResult = (100 - $percent) / 100; 
+?>
 <html>
     <head>
         <meta charset="utf-8">
@@ -42,10 +48,8 @@
             include "koneksi.php";
             $data = mysqli_query($koneksi, "SELECT * FROM data_hari");
             $index = 0;
-            $length = 4;
-            $percent = 50;
-            $percentResult = (100 - $percent) / 100;
-            $hiddenLength = 3;
+            
+            
 
             $valueBobot = $_SESSION['value_bobot'];
 
