@@ -402,12 +402,21 @@
             }
 
             $inversObe = $resultObe;
-            $plusOrMin = -1;
-            foreach($resultObe as $keyItem=>$itemInversObe) {
-                foreach($itemInversObe as $keySubItem=>$subItemInversObe) {
-                    $plusOrMin = $plusOrMin === -1 ? 1 : -1;
-                    $matrix = manipulateArray($resultObe, $keyItem, $keySubItem);
-                    $inversObe[$keyItem][$keySubItem] = $plusOrMin * (1 / $detA * getAdj($matrix));
+            if(count($resultObe) > 2) {
+                $plusOrMin = -1;
+                foreach($resultObe as $keyItem=>$itemInversObe) {
+                    foreach($itemInversObe as $keySubItem=>$subItemInversObe) {
+                        $plusOrMin = $plusOrMin === -1 ? 1 : -1;
+                        $matrix = manipulateArray($resultObe, $keyItem, $keySubItem);
+                        $inversObe[$keyItem][$keySubItem] = $plusOrMin * (1 / $detA * getAdj($matrix));
+                    }
+                }
+            } else {
+                $tempArray = [[$resultObe[1][1], -$resultObe[0][1]],[-$resultObe[1][0],$resultObe[0][0]]];
+                foreach($tempArray as $keyItem=>$itemTempObe) {
+                    foreach($itemTempObe as $keySubItem=>$subItemTempObe) {
+                        $inversObe[$keyItem][$keySubItem] = (1 / getAdj($tempArray)) * $subItemTempObe;
+                    }
                 }
             }
         ?>
