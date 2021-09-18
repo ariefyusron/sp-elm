@@ -1,16 +1,20 @@
 <?php
     include "koneksi.php";
     session_start();
-    $length = (int)$_POST['jumlahfitur'];
-    $hiddenLength = (int)$_POST['jumlahhiden'];
-    $persendata = (int)$_POST['persendata'];
+    $length = 0;
+    $hiddenLength = 0;
+    $persendata = 0;
 
-    if(isset($_POST['jumlahfitur'])) {
+    if(isset($_POST['jumlahfitur']) && isset($_POST['jumlahhiden']) && isset($_POST['persendata'])) {
+        $length = (int)$_POST['jumlahfitur'];
+        $hiddenLength = (int)$_POST['jumlahhiden'];
+        $persendata = (int)$_POST['persendata'];
+
         $_SESSION['jumlahfitur'] = $length;
         $_SESSION['jumlahhiden'] = $hiddenLength;
         $_SESSION['persendata'] = $persendata;
         include "proses_file.php";
-    } else {
+    } else if(isset($_SESSION['jumlahfitur']) && isset($_SESSION['jumlahhiden']) && isset($_SESSION['persendata'])) {
         $length = $_SESSION['jumlahfitur'];
         $hiddenLength = $_SESSION['jumlahhiden'];
         $persendata = $_SESSION['persendata'];
