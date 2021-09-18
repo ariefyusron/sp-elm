@@ -1,7 +1,3 @@
-<?php
-  session_start();
-?>
-
 <form class="container" method="POST" enctype="multipart/form-data" action="data.php">
   <div class="row">
     <div class="col-25">
