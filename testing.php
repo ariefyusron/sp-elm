@@ -225,10 +225,15 @@
         ?>
 
         <table>
+            <tr>
+                <th>No</th>
+                <th>Result</th>
+            </tr>
             <?php
-                foreach($resultOprediksi as $resultOprediksiA) {
+                foreach($resultOprediksi as $indexA=>$resultOprediksiA) {
             ?>
                 <tr>
+                    <td><?= $indexA+1 ?></td>
                     <td><?= $resultOprediksiA ?></td>
                 </tr>
             <?php
@@ -247,10 +252,15 @@
         ?>
 
         <table>
+            <tr>
+                <th>No</th>
+                <th>Result</th>
+            </tr>
             <?php
-                foreach($resultDenormalisasi as $resultDenormalisasiA) {
+                foreach($resultDenormalisasi as $indexResult=>$resultDenormalisasiA) {
             ?>
                 <tr>
+                    <td><?= $indexResult+1 ?></td>
                     <td><?= $resultDenormalisasiA ?></td>
                 </tr>
             <?php

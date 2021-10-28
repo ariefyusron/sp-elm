@@ -50,6 +50,7 @@
             <h2>Nilai MAPE</h2>
         <table>
             <tr>
+                <th>No</th>
                 <th>Nilai Error</th>
             </tr>
             <?php
@@ -63,9 +64,10 @@
                     $index++;
                 }
 
-                foreach ($nilaiMape as $InilaiMape) {
+                foreach ($nilaiMape as $indexMape=>$InilaiMape) {
             ?>
                     <tr>
+                        <td><?= $indexMape+1 ?></td>
                         <td><?= $InilaiMape ?>%</td>
                     </tr>
             <?php
@@ -76,12 +78,14 @@
         <h2>Nilai Akurasi</h2>
         <table>
             <tr>
+                <th>No</th>
                 <th>Akurasi</th>
             </tr>
             <?php
-                foreach ($nilaiMape as $InilaiMape) {
+                foreach ($nilaiMape as $indexNilai=>$InilaiMape) {
             ?>
                     <tr>
+                        <td><?= $indexNilai+1 ?></td>
                         <td><?= 100 - $InilaiMape ?>%</td>
                     </tr>
             <?php
