@@ -46,7 +46,7 @@
         <?php
             $data = mysqli_query($koneksi, "SELECT * FROM data_hari");
             $index = 0;
-            $percent = 50;
+            $percent = $_SESSION['persendata'];
             $percentResult = $percent / 100;
             if (mysqli_num_rows($data) > 0) {
                 $values = array();
