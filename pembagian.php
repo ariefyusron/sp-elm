@@ -114,7 +114,7 @@
         <?php
             $data = mysqli_query($koneksi, "SELECT * FROM data_hari");
             $index = 0;
-            $percentResult = (100 - $percent) / 100;
+            $percentResult = (100 - (100 - $percent)) / 100;
             $targetTesting = array();
             if (mysqli_num_rows($data) > 0) {
                 $values = array();
