@@ -3,7 +3,7 @@
     $length = $_SESSION['jumlahfitur'];
     $hiddenLength = $_SESSION['jumlahhiden'];
     $percent = $_SESSION['persendata'];
-    $percentResult = (100 - $percent) / 100; 
+    $percentResult = (100 - (100 - $percent)) / 100; 
 ?>
 <html>
     <head>

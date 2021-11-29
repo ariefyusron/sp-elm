@@ -61,6 +61,7 @@
         <h2>Dataset</h2>
             <?php 
                 $data = mysqli_query($koneksi, "SELECT * FROM data_hari");
+                $numberData = 1;
                 if (mysqli_num_rows($data) > 0) {?>
                     <table>
                         <tr>
@@ -75,12 +76,13 @@
                             //print_r($d);
                         ?>
                         <tr>
-                            <td> <?php echo $d['no']; ?></td>
+                            <td> <?php echo $numberData; ?></td>
                             <td> <?php echo $d['tanggal']; ?></td>
                             <td> <?php echo $d['jumlah']; ?></td>
                         </tr>
                         <?php
                             array_push($dataArray, (float)$d['jumlah']);
+                            $numberData++;
                             }
                             $_SESSION['data_max'] = max($dataArray);
                             $_SESSION['data_min'] = min($dataArray);
