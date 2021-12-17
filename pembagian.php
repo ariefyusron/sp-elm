@@ -2,7 +2,10 @@
     include "koneksi.php";
     session_start();
     $length = $_SESSION['jumlahfitur'];
-    $hiddenLength = $_SESSION['jumlahhiden']; 
+    $hiddenLength = $_SESSION['jumlahhiden'];
+    srand(12345);
+    $random1 = [];
+    $random2 = [];
 ?>
 <html>
     <head>
@@ -199,6 +202,7 @@
                     for ($j=0; $j < $hiddenLength; $j++) { 
                         $bobot[$i][$j] = rand(0,90)/100;
                         $width[] = $bobot[$i][$j];
+                        array_push($random1, $bobot[$i][$j]);
                     }
                     $valueBobot[] = $width;
                 }
@@ -234,6 +238,7 @@
                 for ($i=0; $i < $hiddenLength; $i++) { 
                     $bias[$i] = rand(0,90)/100;
                     $valueBias[] = $bias[$i];
+                    array_push($random2, $bias[$i]);
                 }
                 $_SESSION['value_bias'] = $valueBias;
             ?>
@@ -246,6 +251,11 @@
                 <?php } ?>
             </tr>
         </table>
-        </div>        
+        </div>   
+        
+        <script>
+            console.log('random1', JSON.parse("<?= json_encode($random1) ?>"))
+            console.log('random1', JSON.parse("<?= json_encode($random2) ?>"))
+        </script>
     </body>
 </html>

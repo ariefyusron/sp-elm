@@ -421,11 +421,6 @@
             }
         ?>
 
-                    <script>
-                        console.log('tes', JSON.parse('<?= json_encode($inversObe) ?>'))
-                        console.log('tes', '<?= $detA ?>')
-                    </script>
-
         <h2>Hasil Invers OBE</h2>
         <table>
             <?php
@@ -534,6 +529,12 @@
                 $max = max($values);
                 $min = min($values);
                 ?>
+                <script>
+                    console.log('values', <?= json_encode($values) ?>)
+                    console.log('invers', JSON.parse("<?= json_encode($inversObe) ?>"))
+                    console.log('transpose', JSON.parse("<?= json_encode($dataTranspose) ?>"))
+                    console.log('target list', JSON.parse("<?= json_encode($_SESSION['target_list']) ?>"))
+                </script>
                 <table>
                     <?php
                         $indexTranspose = 0;
